@@ -43,9 +43,7 @@ spec:
         }
         stage('Complete') {
             steps {
-                container('maven') {
-                    echo 'Job Complete!'
-                }
+                echo 'Job Complete!'
             }
         }
     }
