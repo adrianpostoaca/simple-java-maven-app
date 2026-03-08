@@ -17,12 +17,16 @@ spec:
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                container('maven') {
+                    sh 'mvn -B -DskipTests clean package'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                container('maven') {
+                    sh 'mvn test'
+                }
             }
             post {
                 always {
@@ -32,12 +36,16 @@ spec:
         }
         stage('Deliver') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                container('maven') {
+                    sh './jenkins/scripts/deliver.sh'
+                }
             }
         }
         stage('Complete') {
             steps {
-                echo 'Job Complete!'
+                container('maven') {
+                    echo 'Job Complete!'
+                }
             }
         }
     }
